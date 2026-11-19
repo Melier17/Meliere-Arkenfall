@@ -1,7 +1,7 @@
 # Arkenfall — Technical Architecture
 
 **Version:** 0.1.0  
-**Status:** Initial prototype architecture
+**Status:** First modular source layout created; build verification pending.
 
 ## Current technical baseline
 
@@ -10,29 +10,7 @@
 - CMake
 - Desktop prototype, single-player and local only
 
-## Prototype responsibilities
-
-The first prototype keeps the implementation intentionally small:
-
-- **Entry point:** initializes the window and owns the main loop.
-- **Player state:** stores position, movement speed, size, and display color.
-- **Input/update:** reads movement input and updates the player using frame delta time.
-- **Collision:** checks the player rectangle against static obstacle rectangles.
-- **Camera:** follows the player in world coordinates.
-- **Rendering:** draws the test world, obstacles, player placeholder, and HUD.
-
-## Current limitations
-
-- The player is a colored rectangle, not a final character sprite.
-- The test map and obstacles are hard-coded.
-- Collision response is a simple prototype and is not a complete physics system.
-- There is no animation, combat, inventory, persistence, or networking.
-- The camera currently follows the player directly; smoothing and world-edge clamping are future improvements.
-- This source has not been compiled or run in the current remote editing workflow. A local build is required before marking the milestone as tested.
-
-## Planned source organization
-
-When the prototype grows, split responsibilities into focused modules:
+## Current source organization
 
 ```text
 src/
@@ -45,13 +23,39 @@ src/
 ├── world/
 │   ├── World.cpp
 │   └── World.h
-├── systems/
-│   ├── InputSystem.cpp
-│   └── CollisionSystem.cpp
 └── main.cpp
 ```
 
-The structure above is a target layout, not the current repository contents.
+The original root-level `main.cpp` is being kept temporarily as a legacy reference. The active CMake target now uses `src/main.cpp`.
+
+## Module responsibilities
+
+- **Game:** owns window initialization, the main loop, frame updates, camera tracking, drawing order, and window shutdown.
+- **Player:** stores player state, reads keyboard movement, normalizes diagonal movement, and draws the player placeholder.
+- **World:** owns world dimensions and static obstacles, resolves basic axis-separated collisions, clamps the player to world bounds, and renders the test environment.
+- **Entry point:** creates the Game object and starts its run loop.
+
+## Current prototype behavior
+
+- Eight-direction movement with WASD or arrow keys.
+- Delta-time-based movement.
+- Camera follows the player.
+- Bounded test world with a grid and static obstacles.
+- Basic rectangle collision handling.
+- HUD identifying the prototype build.
+
+## Current limitations and verification
+
+- The player is a colored rectangle, not a final character sprite.
+- The test map and obstacles are hard-coded.
+- Collision response is a simple prototype, not a complete physics system.
+- There is no animation, combat, inventory, persistence, or networking.
+- The camera follows the player directly; smoothing and world-edge clamping are future improvements.
+- The modular source has been committed remotely but has not been compiled or run in the current workflow. A local CMake build and runtime test are required before marking it as verified.
+
+## Planned extensions
+
+Potential next modules include game states/scenes, input abstraction, interaction, inventory, persistence, and data-driven world content. These are not implemented yet.
 
 ## Architectural rules
 
