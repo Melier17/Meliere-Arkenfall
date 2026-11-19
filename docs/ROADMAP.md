@@ -1,7 +1,7 @@
 # Arkenfall — Development Roadmap
 
 **Document version:** 0.1.0  
-**Status:** Modular source layout created; build verification pending.
+**Status:** Navigation state flow implemented in source; build verification pending.
 
 This roadmap separates the long-term game vision from the first technical deliverables. Dates and estimates are intentionally omitted until the scope and development environment are validated.
 
@@ -31,7 +31,10 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Split the prototype into modular source files.
 - [x] Introduce a central Game module to own the game loop and lifecycle.
 - [x] Separate Player and World responsibilities.
-- [ ] Introduce modular game states and scenes.
+- [x] Define the initial MainMenu, Playing, Paused, and ExitConfirmation states.
+- [x] Add keyboard and mouse navigation for the initial menus.
+- [x] Suspend player updates while the game is paused.
+- [ ] Introduce reusable UI components and game states/scenes for future systems.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
 - [ ] Add a simple inventory prototype.
