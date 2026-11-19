@@ -1,0 +1,54 @@
+# Arkenfall — Development Roadmap
+
+**Document version:** 0.1.0  
+**Status:** Initial planning baseline
+
+This roadmap separates the long-term game vision from the first technical deliverables. Dates and estimates are intentionally omitted until the scope and development environment are validated.
+
+## Phase 0 — Repository and technical foundation
+
+- [x] Identify the existing C++17 / raylib / CMake project.
+- [x] Preserve the existing Game Design Document.
+- [x] Create an isolated development branch for the Arkenfall reorganization.
+- [ ] Standardize project naming and build target.
+- [ ] Verify source files and fix compilation issues.
+- [ ] Establish a clean, reproducible build.
+
+## Phase 1 — Playable 2D foundation (v0.1)
+
+- [ ] Initialize the game window and main loop.
+- [ ] Implement a player entity with position and movement speed.
+- [ ] Support eight-direction movement.
+- [ ] Normalize diagonal movement.
+- [ ] Add a camera that follows the player.
+- [ ] Create a basic test map.
+- [ ] Add solid obstacles and collision handling.
+- [ ] Separate update, input, and drawing responsibilities.
+
+## Phase 2 — Core gameplay structure
+
+- [ ] Introduce modular game states and scenes.
+- [ ] Add data-driven player attributes.
+- [ ] Define a basic interaction system.
+- [ ] Add a simple inventory prototype.
+- [ ] Establish save-data format for local testing.
+
+## Phase 3 — World and progression prototypes
+
+- [ ] Build a small exploration area.
+- [ ] Prototype gathering and resource nodes.
+- [ ] Prototype character experience and levels.
+- [ ] Prototype one companion.
+- [ ] Prototype one small dungeon encounter.
+
+## Phase 4 — Online architecture research
+
+- [ ] Define authoritative server responsibilities.
+- [ ] Evaluate networking and persistence options.
+- [ ] Design account, character, and session boundaries.
+- [ ] Threat-model trading, inventory, rewards, and guild permissions.
+- [ ] Build a separate network proof of concept before integrating it into the game.
+
+## Production rule
+
+A roadmap item is complete only when it has been implemented, reviewed, and tested. A design decision or a document entry does not mean the corresponding game feature exists.
