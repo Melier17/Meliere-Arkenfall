@@ -16,5 +16,18 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
-add_executable(arkenfall main.cpp)
+add_executable(arkenfall
+    src/main.cpp
+    src/core/Game.cpp
+    src/entities/Player.cpp
+    src/world/World.cpp
+)
+
+target_include_directories(arkenfall PRIVATE
+    src
+    src/core
+    src/entities
+    src/world
+)
+
 target_link_libraries(arkenfall PRIVATE raylib)
