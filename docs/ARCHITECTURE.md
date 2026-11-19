@@ -1,7 +1,7 @@
 # Arkenfall — Technical Architecture
 
 **Version:** 0.1.0  
-**Status:** First modular source layout created; build verification pending.
+**Status:** Modular foundation and first navigation states implemented; build verification pending.
 
 ## Current technical baseline
 
@@ -16,7 +16,8 @@
 src/
 ├── core/
 │   ├── Game.cpp
-│   └── Game.h
+│   ├── Game.h
+│   └── GameState.h
 ├── entities/
 │   ├── Player.cpp
 │   └── Player.h
@@ -26,23 +27,34 @@ src/
 └── main.cpp
 ```
 
-The original root-level `main.cpp` is being kept temporarily as a legacy reference. The active CMake target now uses `src/main.cpp`.
+The original root-level main.cpp is being kept temporarily as a legacy reference. The active CMake target uses src/main.cpp.
 
 ## Module responsibilities
 
-- **Game:** owns window initialization, the main loop, frame updates, camera tracking, drawing order, and window shutdown.
+- **Game:** owns window initialization, the main loop, state transitions, frame updates, camera tracking, drawing order, and window shutdown.
+- **GameState:** defines the available high-level screens: MainMenu, Playing, Paused, and ExitConfirmation.
 - **Player:** stores player state, reads keyboard movement, normalizes diagonal movement, and draws the player placeholder.
 - **World:** owns world dimensions and static obstacles, resolves basic axis-separated collisions, clamps the player to world bounds, and renders the test environment.
 - **Entry point:** creates the Game object and starts its run loop.
 
+## Navigation and controls
+
+- **Main menu:** Enter or Start Game begins the prototype; Escape or Exit opens the exit confirmation.
+- **Playing:** WASD or arrow keys move the player; Escape opens the pause screen.
+- **Paused:** Escape or R resumes; M returns to the main menu; Q opens exit confirmation.
+- **Exit confirmation:** Y confirms exit; N or Escape cancels. Mouse buttons are also available on the menu screens.
+
+The pause state does not call the player's update function, so movement is suspended while paused. Returning from pause to the game preserves the current player position.
+
 ## Current prototype behavior
 
-- Eight-direction movement with WASD or arrow keys.
+- Eight-direction movement with normalized diagonal speed.
 - Delta-time-based movement.
 - Camera follows the player.
 - Bounded test world with a grid and static obstacles.
 - Basic rectangle collision handling.
-- HUD identifying the prototype build.
+- Main menu, pause screen, and exit confirmation.
+- Simple keyboard and mouse UI interaction.
 
 ## Current limitations and verification
 
@@ -51,11 +63,12 @@ The original root-level `main.cpp` is being kept temporarily as a legacy referen
 - Collision response is a simple prototype, not a complete physics system.
 - There is no animation, combat, inventory, persistence, or networking.
 - The camera follows the player directly; smoothing and world-edge clamping are future improvements.
+- Window-manager close requests still close the application directly.
 - The modular source has been committed remotely but has not been compiled or run in the current workflow. A local CMake build and runtime test are required before marking it as verified.
 
 ## Planned extensions
 
-Potential next modules include game states/scenes, input abstraction, interaction, inventory, persistence, and data-driven world content. These are not implemented yet.
+Potential next modules include game states/scenes beyond the initial navigation flow, input abstraction, interaction, inventory, persistence, and data-driven world content. These are not implemented yet.
 
 ## Architectural rules
 
