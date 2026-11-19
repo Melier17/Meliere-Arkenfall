@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 
+#include "GameState.h"
 #include "entities/Player.h"
 #include "world/World.h"
 
@@ -23,9 +24,16 @@ private:
     Player player_;
     World world_;
     Camera2D camera_;
+    GameState state_;
     bool initialized_;
+    bool shouldClose_;
 
     void Initialize();
     void Update(float deltaTime);
     void Draw() const;
+
+    void UpdateMainMenu();
+    void UpdatePlaying(float deltaTime);
+    void UpdatePaused();
+    void UpdateExitConfirmation();
 };
