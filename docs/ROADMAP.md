@@ -1,7 +1,7 @@
 # Arkenfall — Development Roadmap
 
 **Document version:** 0.1.0  
-**Status:** Initial playable foundation implemented; build verification pending.
+**Status:** Modular source layout created; build verification pending.
 
 This roadmap separates the long-term game vision from the first technical deliverables. Dates and estimates are intentionally omitted until the scope and development environment are validated.
 
@@ -28,7 +28,9 @@ This roadmap separates the long-term game vision from the first technical delive
 
 ## Phase 2 — Core gameplay structure
 
-- [ ] Split the prototype into modular source files.
+- [x] Split the prototype into modular source files.
+- [x] Introduce a central Game module to own the game loop and lifecycle.
+- [x] Separate Player and World responsibilities.
 - [ ] Introduce modular game states and scenes.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
