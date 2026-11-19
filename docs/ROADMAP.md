@@ -1,7 +1,7 @@
 # Arkenfall — Development Roadmap
 
 **Document version:** 0.1.0  
-**Status:** Initial planning baseline
+**Status:** Initial playable foundation implemented; build verification pending.
 
 This roadmap separates the long-term game vision from the first technical deliverables. Dates and estimates are intentionally omitted until the scope and development environment are validated.
 
@@ -10,23 +10,25 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Identify the existing C++17 / raylib / CMake project.
 - [x] Preserve the existing Game Design Document.
 - [x] Create an isolated development branch for the Arkenfall reorganization.
-- [ ] Standardize project naming and build target.
-- [ ] Verify source files and fix compilation issues.
+- [x] Standardize project naming and build target.
+- [x] Review and correct the initial source-level issues.
 - [ ] Establish a clean, reproducible build.
 
 ## Phase 1 — Playable 2D foundation (v0.1)
 
-- [ ] Initialize the game window and main loop.
-- [ ] Implement a player entity with position and movement speed.
-- [ ] Support eight-direction movement.
-- [ ] Normalize diagonal movement.
-- [ ] Add a camera that follows the player.
-- [ ] Create a basic test map.
-- [ ] Add solid obstacles and collision handling.
-- [ ] Separate update, input, and drawing responsibilities.
+- [x] Initialize the game window and main loop.
+- [x] Implement a player entity with position and movement speed.
+- [x] Support eight-direction movement.
+- [x] Normalize diagonal movement.
+- [x] Add a camera that follows the player.
+- [x] Create a bounded test world.
+- [x] Add static obstacles and basic collision handling.
+- [x] Separate input/update and world drawing into dedicated functions.
+- [ ] Compile and test the prototype on a supported desktop environment.
 
 ## Phase 2 — Core gameplay structure
 
+- [ ] Split the prototype into modular source files.
 - [ ] Introduce modular game states and scenes.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
@@ -51,4 +53,4 @@ This roadmap separates the long-term game vision from the first technical delive
 
 ## Production rule
 
-A roadmap item is complete only when it has been implemented, reviewed, and tested. A design decision or a document entry does not mean the corresponding game feature exists.
+A roadmap item is complete only when it has been implemented, reviewed, and tested. A design decision or a document entry does not mean the corresponding game feature exists. Items marked implemented still require a local build and runtime verification where indicated.
