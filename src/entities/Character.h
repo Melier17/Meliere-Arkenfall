@@ -1,5 +1,7 @@
 #pragma once
 
+#include "systems/Inventory.h"
+
 #include <string>
 
 enum class CharacterRace { Human, Elf, Dwarf };
@@ -19,6 +21,8 @@ public:
     int GetLevel() const;
     int GetExperience() const;
     void SetProgression(int level, int experience);
+    Inventory& GetInventory();
+    const Inventory& GetInventory() const;
     bool IsCreated() const;
     bool Create();
 
@@ -29,4 +33,5 @@ private:
     int level_;
     int experience_;
     bool created_;
+    Inventory inventory_;
 };
