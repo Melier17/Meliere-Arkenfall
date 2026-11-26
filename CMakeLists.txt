@@ -39,6 +39,7 @@ target_include_directories(arkenfall PRIVATE
     src
     src/core
     src/entities
+    src/systems
     src/world
     src/ui
 )
