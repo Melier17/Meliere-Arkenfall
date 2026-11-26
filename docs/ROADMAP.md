@@ -36,6 +36,8 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Suspend player updates while the game is paused.
 - [x] Extract reusable menu UI components into a dedicated module.
 - [ ] Expand game states/scenes for future systems.
+- [x] Create the initial Character data model (name, provisional race/archetype, level, experience).
+- [ ] Connect character creation UI to the Character model.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
 - [ ] Add a simple inventory prototype.
