@@ -94,7 +94,7 @@ bool SaveSystem::LoadPlayerPosition(Vector2& position,
         return false;
 
     if (loadedPosition.x < 0.0f || loadedPosition.y < 0.0f
-        || loadedPosition.x > 2400.0f || loadedPosition.y > 1600.0f)
+        || loadedPosition.x > 2368.0f || loadedPosition.y > 1568.0f)
         return false;
 
     position = loadedPosition;
