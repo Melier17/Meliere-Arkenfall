@@ -11,7 +11,7 @@ namespace
 
 GatheringSystem::GatheringSystem()
     : nodes_{
-        { "wood", "Wood", { 1320.0f, 800.0f }, 8, Color{ 117, 78, 45, 255 } },
+        { "wood", "Wood", { 1280.0f, 820.0f }, 8, Color{ 117, 78, 45, 255 } },
         { "stone", "Stone", { 1080.0f, 930.0f }, 8, Color{ 145, 150, 151, 255 } },
         { "herb", "Herbs", { 1280.0f, 1010.0f }, 6, Color{ 72, 170, 92, 255 } },
         { "iron_ore", "Iron Ore", { 1390.0f, 960.0f }, 5, Color{ 130, 105, 95, 255 } }
