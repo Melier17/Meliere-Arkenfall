@@ -46,7 +46,8 @@ The original root-level main.cpp is being kept temporarily as a legacy reference
 
 ## Navigation and controls
 
-- **Main menu:** Enter or Start Game opens character creation; Escape or Exit opens the exit confirmation.\n- **Character creation:** type a name, use Left/Right or the on-screen arrows to cycle provisional races, Tab or the on-screen arrow to cycle archetypes, Enter or Create to confirm, and Escape or Back to return.
+- **Main menu:** Enter or Start Game opens character creation; Escape or Exit opens the exit confirmation.
+- **Character creation:** type a name, use Left/Right or the on-screen arrows to cycle provisional races, Tab or the on-screen arrow to cycle archetypes, Enter or Create to confirm, and Escape or Back to return.
 - **Playing:** WASD or arrow keys move the player; Escape opens the pause screen.
 - **Paused:** Escape or R resumes; M returns to the main menu; Q opens exit confirmation.
 - **Exit confirmation:** Y confirms exit; N or Escape cancels. Mouse buttons are also available on the menu screens.
@@ -61,7 +62,8 @@ The pause state does not call the player's update function, so movement is suspe
 - Bounded test world with a grid and static obstacles.
 - Basic rectangle collision handling.
 - Main menu, pause screen, and exit confirmation.
-- Simple keyboard and mouse UI interaction.\n- Initial character creation screen connected to the Character model, with name validation and provisional selections.
+- Simple keyboard and mouse UI interaction.
+- Initial character creation screen connected to the Character model, with name validation and provisional selections.
 - Reusable menu presentation module separated from the Game controller.
 
 ## Current limitations and verification
