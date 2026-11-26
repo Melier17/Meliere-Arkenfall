@@ -47,8 +47,10 @@ This roadmap separates the long-term game vision from the first technical delive
 - [ ] Define a basic interaction system.
 - [x] Create a modular inventory data model with capacity, stack limits, add/remove, and quantity queries.
 - [x] Attach the inventory model to each Character instance.
-- [ ] Integrate inventory with the Character model and gameplay UI.
-- [ ] Add a simple interactive inventory prototype.
+- [x] Integrate the inventory data model with the Character model.
+- [x] Add an in-game inventory overlay with item slots, quantity display, and selection.
+- [x] Add a simple interactive inventory prototype (open/close, mouse and keyboard selection).
+- [ ] Add item descriptions, equipment actions, and inventory persistence.
 - [ ] Add automated tests for inventory edge cases.
 - [x] Establish a versioned local save-data format for character and position.
 - [ ] Verify save-data compatibility and recovery through runtime tests.
