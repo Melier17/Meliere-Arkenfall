@@ -34,7 +34,8 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Define the initial MainMenu, Playing, Paused, and ExitConfirmation states.
 - [x] Add keyboard and mouse navigation for the initial menus.
 - [x] Suspend player updates while the game is paused.
-- [ ] Introduce reusable UI components and game states/scenes for future systems.
+- [x] Extract reusable menu UI components into a dedicated module.
+- [ ] Expand game states/scenes for future systems.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
 - [ ] Add a simple inventory prototype.
