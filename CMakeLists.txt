@@ -21,6 +21,8 @@ add_executable(arkenfall
     src/core/Game.cpp
     src/core/Game.h
     src/core/GameState.h
+    src/ui/MenuUI.cpp
+    src/ui/MenuUI.h
     src/entities/Player.cpp
     src/entities/Player.h
     src/world/World.cpp
@@ -32,6 +34,7 @@ target_include_directories(arkenfall PRIVATE
     src/core
     src/entities
     src/world
+    src/ui
 )
 
 target_link_libraries(arkenfall PRIVATE raylib)
