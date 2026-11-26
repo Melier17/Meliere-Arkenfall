@@ -12,7 +12,8 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Create an isolated development branch for the Arkenfall reorganization.
 - [x] Standardize project naming and build target.
 - [x] Review and correct the initial source-level issues.
-- [ ] Establish a clean, reproducible build.
+- [x] Add a GitHub Actions Linux build workflow for reproducible compile checks.
+- [ ] Establish a clean, reproducible build (awaiting workflow result).
 
 ## Phase 1 — Playable 2D foundation (v0.1)
 
@@ -45,6 +46,7 @@ This roadmap separates the long-term game vision from the first technical delive
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
 - [x] Create a modular inventory data model with capacity, stack limits, add/remove, and quantity queries.
+- [x] Attach the inventory model to each Character instance.
 - [ ] Integrate inventory with the Character model and gameplay UI.
 - [ ] Add a simple interactive inventory prototype.
 - [ ] Add automated tests for inventory edge cases.
