@@ -13,6 +13,8 @@ public:
     void Draw() const;
 
     Vector2 GetCenter() const;
+    Vector2 GetPosition() const;
+    void SetPosition(Vector2 position);
 
 private:
     Vector2 position_;
