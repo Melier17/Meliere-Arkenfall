@@ -64,3 +64,39 @@ bool SaveSystem::LoadCharacter(Character& character,
     character.SetProgression(level, experience);
     return character.Create();
 }
+
+bool SaveSystem::SavePlayerPosition(Vector2 position,
+                                    const std::string& filePath)
+{
+    if (filePath.empty())
+        return false;
+
+    std::ofstream file(filePath, std::ios::trunc);
+    if (!file.is_open())
+        return false;
+
+    file << position.x << '\\n' << position.y << '\\n';
+    return file.good();
+}
+
+bool SaveSystem::LoadPlayerPosition(Vector2& position,
+                                    const std::string& filePath)
+{
+    if (filePath.empty())
+        return false;
+
+    std::ifstream file(filePath);
+    if (!file.is_open())
+        return false;
+
+    Vector2 loadedPosition{};
+    if (!(file >> loadedPosition.x >> loadedPosition.y))
+        return false;
+
+    if (loadedPosition.x < 0.0f || loadedPosition.y < 0.0f
+        || loadedPosition.x > 2400.0f || loadedPosition.y > 1600.0f)
+        return false;
+
+    position = loadedPosition;
+    return true;
+}
