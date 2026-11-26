@@ -8,7 +8,12 @@ namespace
     constexpr Rectangle MAIN_MENU_BUTTON = { 490.0f, 370.0f, 300.0f, 54.0f };
     constexpr Rectangle PAUSE_EXIT_BUTTON = { 490.0f, 440.0f, 300.0f, 54.0f };
     constexpr Rectangle CONFIRM_BUTTON = { 390.0f, 390.0f, 220.0f, 54.0f };
-    constexpr Rectangle CANCEL_BUTTON = { 670.0f, 390.0f, 220.0f, 54.0f };\n    constexpr Rectangle RACE_PREVIOUS_BUTTON = { 600.0f, 390.0f, 42.0f, 42.0f };\n    constexpr Rectangle RACE_NEXT_BUTTON = { 840.0f, 390.0f, 42.0f, 42.0f };\n    constexpr Rectangle ARCHETYPE_NEXT_BUTTON = { 840.0f, 440.0f, 42.0f, 42.0f };\n    constexpr Rectangle CREATE_CHARACTER_BUTTON = { 600.0f, 515.0f, 220.0f, 54.0f };\n    constexpr Rectangle BACK_TO_MENU_BUTTON = { 390.0f, 515.0f, 170.0f, 54.0f };
+    constexpr Rectangle CANCEL_BUTTON = { 670.0f, 390.0f, 220.0f, 54.0f };
+    constexpr Rectangle RACE_PREVIOUS_BUTTON = { 600.0f, 390.0f, 42.0f, 42.0f };
+    constexpr Rectangle RACE_NEXT_BUTTON = { 840.0f, 390.0f, 42.0f, 42.0f };
+    constexpr Rectangle ARCHETYPE_NEXT_BUTTON = { 840.0f, 440.0f, 42.0f, 42.0f };
+    constexpr Rectangle CREATE_CHARACTER_BUTTON = { 600.0f, 515.0f, 220.0f, 54.0f };
+    constexpr Rectangle BACK_TO_MENU_BUTTON = { 390.0f, 515.0f, 170.0f, 54.0f };
 
     bool IsPressed(Rectangle bounds)
     {
@@ -29,7 +34,12 @@ namespace MenuUI
             case Button::MainMenu: return MAIN_MENU_BUTTON;
             case Button::PauseExit: return PAUSE_EXIT_BUTTON;
             case Button::ConfirmExit: return CONFIRM_BUTTON;
-            case Button::CancelExit: return CANCEL_BUTTON;\n            case Button::RacePrevious: return RACE_PREVIOUS_BUTTON;\n            case Button::RaceNext: return RACE_NEXT_BUTTON;\n            case Button::ArchetypeNext: return ARCHETYPE_NEXT_BUTTON;\n            case Button::CreateCharacter: return CREATE_CHARACTER_BUTTON;\n            case Button::BackToMenu: return BACK_TO_MENU_BUTTON;
+            case Button::CancelExit: return CANCEL_BUTTON;
+            case Button::RacePrevious: return RACE_PREVIOUS_BUTTON;
+            case Button::RaceNext: return RACE_NEXT_BUTTON;
+            case Button::ArchetypeNext: return ARCHETYPE_NEXT_BUTTON;
+            case Button::CreateCharacter: return CREATE_CHARACTER_BUTTON;
+            case Button::BackToMenu: return BACK_TO_MENU_BUTTON;
         }
         return {};
     }
