@@ -2,7 +2,8 @@
 #include "ui/MenuUI.h"
 
 Game::Game()
-    : camera_{},
+    : characterNameError_(false),
+      camera_{},
       state_(GameState::MainMenu),
       initialized_(false),
       shouldClose_(false)
@@ -78,7 +79,7 @@ void Game::UpdateMainMenu()
 
 void Game::UpdateCharacterCreation()
 {
-    if (IsKeyPressed(KEY_ESCAPE))
+    if (IsKeyPressed(KEY_ESCAPE) || MenuUI::IsButtonPressed(MenuUI::Button::BackToMenu))
     {
         state_ = GameState::MainMenu;
         characterNameError_ = false;
@@ -108,20 +109,24 @@ void Game::UpdateCharacterCreation()
         characterNameError_ = false;
     }
 
-    if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT))
+    if (IsKeyPressed(KEY_LEFT) || MenuUI::IsButtonPressed(MenuUI::Button::RacePrevious))
     {
         int race = static_cast<int>(character_.GetRace());
-        race = (race + (IsKeyPressed(KEY_RIGHT) ? 1 : 2)) % 3;
-        character_.SetRace(static_cast<CharacterRace>(race));
+        character_.SetRace(static_cast<CharacterRace>((race + 2) % 3));
+    }
+    else if (IsKeyPressed(KEY_RIGHT) || MenuUI::IsButtonPressed(MenuUI::Button::RaceNext))
+    {
+        int race = static_cast<int>(character_.GetRace());
+        character_.SetRace(static_cast<CharacterRace>((race + 1) % 3));
     }
 
-    if (IsKeyPressed(KEY_TAB))
+    if (IsKeyPressed(KEY_TAB) || MenuUI::IsButtonPressed(MenuUI::Button::ArchetypeNext))
     {
         int archetype = static_cast<int>(character_.GetArchetype());
         character_.SetArchetype(static_cast<CharacterArchetype>((archetype + 1) % 3));
     }
 
-    if (IsKeyPressed(KEY_ENTER))
+    if (IsKeyPressed(KEY_ENTER) || MenuUI::IsButtonPressed(MenuUI::Button::CreateCharacter))
     {
         if (character_.Create())
         {
@@ -162,11 +167,16 @@ void Game::DrawCharacterCreation() const
         case CharacterArchetype::Arcanist: archetypeName = "Arcanist"; break;
     }
 
-    DrawText("RACE  [LEFT / RIGHT]", 390, 395, 18, LIGHTGRAY);
-    DrawText(raceName, 650, 395, 22, GOLD);
-    DrawText("ARCHETYPE  [TAB]", 390, 445, 18, LIGHTGRAY);
-    DrawText(archetypeName, 650, 445, 22, GOLD);
-    DrawText("ENTER: CREATE   |   ESC: BACK", 390, 520, 18, RAYWHITE);
+    DrawText("RACE", 390, 405, 18, LIGHTGRAY);
+    MenuUI::DrawButton(MenuUI::Button::RacePrevious, "<");
+    DrawText(raceName, 660, 405, 22, GOLD);
+    MenuUI::DrawButton(MenuUI::Button::RaceNext, ">");
+    DrawText("ARCHETYPE", 390, 455, 18, LIGHTGRAY);
+    DrawText(archetypeName, 650, 455, 22, GOLD);
+    MenuUI::DrawButton(MenuUI::Button::ArchetypeNext, ">");
+    MenuUI::DrawButton(MenuUI::Button::BackToMenu, "BACK");
+    MenuUI::DrawButton(MenuUI::Button::CreateCharacter, "CREATE");
+    DrawText("ENTER: CREATE   |   ESC: BACK", 390, 590, 18, RAYWHITE);
 
     if (characterNameError_)
         DrawText("Please enter a character name first.", 390, 565, 18, RED);
