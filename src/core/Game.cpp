@@ -329,4 +329,7 @@ void Game::Run()
         Update(deltaTime);
         Draw();
     }
+
+    SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
+    SaveSystem::SavePlayerPosition(player_.GetPosition(), "arkenfall_position.sav");
 }
