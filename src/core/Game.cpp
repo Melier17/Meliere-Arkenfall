@@ -176,10 +176,10 @@ void Game::DrawCharacterCreation() const
     MenuUI::DrawButton(MenuUI::Button::ArchetypeNext, ">");
     MenuUI::DrawButton(MenuUI::Button::BackToMenu, "BACK");
     MenuUI::DrawButton(MenuUI::Button::CreateCharacter, "CREATE");
-    DrawText("ENTER: CREATE   |   ESC: BACK", 390, 590, 18, RAYWHITE);
+    DrawText("ENTER: CREATE   |   ESC: BACK", 390, 610, 18, RAYWHITE);
 
     if (characterNameError_)
-        DrawText("Please enter a character name first.", 390, 565, 18, RED);
+        DrawText("Please enter a character name first.", 390, 575, 18, RED);
 
     DrawText("Prototype choices — final races and archetypes are pending design.",
         250, 650, 16, LIGHTGRAY);
