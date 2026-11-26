@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "SaveSystem.h"
 #include "ui/MenuUI.h"
 
 Game::Game()
@@ -34,6 +35,11 @@ void Game::Initialize()
     camera_.zoom = 1.0f;
 
     initialized_ = IsWindowReady();
+
+    if (initialized_ && SaveSystem::LoadCharacter(character_, "arkenfall_character.sav"))
+    {
+        state_ = GameState::Playing;
+    }
 }
 
 void Game::Update(float deltaTime)
@@ -131,6 +137,7 @@ void Game::UpdateCharacterCreation()
         if (character_.Create())
         {
             characterNameError_ = false;
+            SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
             state_ = GameState::Playing;
         }
         else
@@ -222,6 +229,7 @@ void Game::UpdateExitConfirmation()
 {
     if (IsKeyPressed(KEY_Y) || MenuUI::IsButtonPressed(MenuUI::Button::ConfirmExit))
     {
+        SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
         shouldClose_ = true;
         return;
     }
