@@ -25,6 +25,8 @@ add_executable(arkenfall
     src/core/GameState.h
     src/ui/MenuUI.cpp
     src/ui/MenuUI.h
+    src/ui/InventoryUI.cpp
+    src/ui/InventoryUI.h
     src/systems/Inventory.cpp
     src/systems/Inventory.h
     src/entities/Character.cpp
