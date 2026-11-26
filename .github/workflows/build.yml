@@ -1,0 +1,32 @@
+name: Arkenfall Build
+
+on:
+  push:
+    branches:
+      - main
+      - "arkenfall/**"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install raylib build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential cmake git \
+            libasound2-dev libgl1-mesa-dev libglu1-mesa-dev \
+            libx11-dev libxcursor-dev libxinerama-dev \
+            libxrandr-dev libxi-dev
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --parallel 2
