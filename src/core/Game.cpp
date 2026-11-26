@@ -1,82 +1,5 @@
 #include "Game.h"
-
-namespace
-{
-    const Rectangle START_BUTTON = { 490.0f, 330.0f, 300.0f, 58.0f };
-    const Rectangle MENU_EXIT_BUTTON = { 490.0f, 408.0f, 300.0f, 58.0f };
-
-    const Rectangle RESUME_BUTTON = { 490.0f, 300.0f, 300.0f, 54.0f };
-    const Rectangle MAIN_MENU_BUTTON = { 490.0f, 370.0f, 300.0f, 54.0f };
-    const Rectangle PAUSE_EXIT_BUTTON = { 490.0f, 440.0f, 300.0f, 54.0f };
-
-    const Rectangle CONFIRM_BUTTON = { 390.0f, 390.0f, 220.0f, 54.0f };
-    const Rectangle CANCEL_BUTTON = { 670.0f, 390.0f, 220.0f, 54.0f };
-
-    bool IsButtonPressed(Rectangle bounds)
-    {
-        return CheckCollisionPointRec(GetMousePosition(), bounds)
-            && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    }
-
-    void DrawButton(Rectangle bounds, const char* label)
-    {
-        const bool hovered = CheckCollisionPointRec(GetMousePosition(), bounds);
-        const Color fill = hovered
-            ? Color{ 115, 91, 55, 255 }
-            : Color{ 65, 58, 49, 255 };
-
-        DrawRectangleRec(bounds, fill);
-        DrawRectangleLinesEx(bounds, 2.0f, GOLD);
-
-        const int textWidth = MeasureText(label, 22);
-        DrawText(
-            label,
-            static_cast<int>(bounds.x + (bounds.width - textWidth) / 2.0f),
-            static_cast<int>(bounds.y + (bounds.height - 22.0f) / 2.0f),
-            22,
-            RAYWHITE
-        );
-    }
-
-    void DrawScreenTitle(const char* subtitle)
-    {
-        const char* title = "ARKENFALL";
-        const int titleWidth = MeasureText(title, 58);
-
-        DrawText(
-            title,
-            (1280 - titleWidth) / 2,
-            150,
-            58,
-            GOLD
-        );
-
-        const int subtitleWidth = MeasureText(subtitle, 20);
-        DrawText(
-            subtitle,
-            (1280 - subtitleWidth) / 2,
-            225,
-            20,
-            RAYWHITE
-        );
-    }
-
-    void DrawMenuBackground()
-    {
-        ClearBackground(Color{ 24, 34, 32, 255 });
-        DrawRectangle(0, 0, 1280, 720, Color{ 29, 43, 39, 255 });
-
-        for (int x = 0; x < 1280; x += 80)
-        {
-            DrawLine(x, 0, x, 720, Color{ 39, 54, 47, 255 });
-        }
-
-        for (int y = 0; y < 720; y += 80)
-        {
-            DrawLine(0, y, 1280, y, Color{ 39, 54, 47, 255 });
-        }
-    }
-}
+#include "ui/MenuUI.h"
 
 Game::Game()
     : camera_{},
@@ -136,13 +59,13 @@ void Game::Update(float deltaTime)
 
 void Game::UpdateMainMenu()
 {
-    if (IsKeyPressed(KEY_ENTER) || IsButtonPressed(START_BUTTON))
+    if (IsKeyPressed(KEY_ENTER) || MenuUI::IsButtonPressed(MenuUI::Button::Start))
     {
         state_ = GameState::Playing;
         return;
     }
 
-    if (IsKeyPressed(KEY_ESCAPE) || IsButtonPressed(MENU_EXIT_BUTTON))
+    if (IsKeyPressed(KEY_ESCAPE) || MenuUI::IsButtonPressed(MenuUI::Button::MenuExit))
     {
         state_ = GameState::ExitConfirmation;
     }
@@ -163,19 +86,19 @@ void Game::UpdatePlaying(float deltaTime)
 void Game::UpdatePaused()
 {
     if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_R)
-        || IsButtonPressed(RESUME_BUTTON))
+        || MenuUI::IsButtonPressed(MenuUI::Button::Resume))
     {
         state_ = GameState::Playing;
         return;
     }
 
-    if (IsKeyPressed(KEY_M) || IsButtonPressed(MAIN_MENU_BUTTON))
+    if (IsKeyPressed(KEY_M) || MenuUI::IsButtonPressed(MenuUI::Button::MainMenu))
     {
         state_ = GameState::MainMenu;
         return;
     }
 
-    if (IsKeyPressed(KEY_Q) || IsButtonPressed(PAUSE_EXIT_BUTTON))
+    if (IsKeyPressed(KEY_Q) || MenuUI::IsButtonPressed(MenuUI::Button::PauseExit))
     {
         state_ = GameState::ExitConfirmation;
     }
@@ -183,14 +106,14 @@ void Game::UpdatePaused()
 
 void Game::UpdateExitConfirmation()
 {
-    if (IsKeyPressed(KEY_Y) || IsButtonPressed(CONFIRM_BUTTON))
+    if (IsKeyPressed(KEY_Y) || MenuUI::IsButtonPressed(MenuUI::Button::ConfirmExit))
     {
         shouldClose_ = true;
         return;
     }
 
     if (IsKeyPressed(KEY_N) || IsKeyPressed(KEY_ESCAPE)
-        || IsButtonPressed(CANCEL_BUTTON))
+        || MenuUI::IsButtonPressed(MenuUI::Button::CancelExit))
     {
         state_ = GameState::MainMenu;
     }
@@ -216,10 +139,10 @@ void Game::Draw() const
             if (state_ == GameState::Paused)
             {
                 DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Fade(BLACK, 0.72f));
-                DrawScreenTitle("GAME PAUSED");
-                DrawButton(RESUME_BUTTON, "RESUME");
-                DrawButton(MAIN_MENU_BUTTON, "MAIN MENU");
-                DrawButton(PAUSE_EXIT_BUTTON, "EXIT GAME");
+                MenuUI::DrawScreenTitle("GAME PAUSED");
+                MenuUI::DrawButton(MenuUI::Button::Resume, "RESUME");
+                MenuUI::DrawButton(MenuUI::Button::MainMenu, "MAIN MENU");
+                MenuUI::DrawButton(MenuUI::Button::PauseExit, "EXIT GAME");
             }
         EndDrawing();
 
@@ -227,24 +150,24 @@ void Game::Draw() const
     }
 
     BeginDrawing();
-        DrawMenuBackground();
+        MenuUI::DrawMenuBackground();
 
         if (state_ == GameState::MainMenu)
         {
-            DrawScreenTitle("YOUR WORLD. YOUR LEGEND.");
-            DrawButton(START_BUTTON, "START GAME");
-            DrawButton(MENU_EXIT_BUTTON, "EXIT");
+            MenuUI::DrawScreenTitle("YOUR WORLD. YOUR LEGEND.");
+            MenuUI::DrawButton(MenuUI::Button::Start, "START GAME");
+            MenuUI::DrawButton(MenuUI::Button::MenuExit, "EXIT");
             DrawText("MELIERE GAMES", 24, 680, 16, LIGHTGRAY);
             DrawText("PROTOTYPE v0.1.0", 1070, 680, 16, LIGHTGRAY);
         }
         else if (state_ == GameState::ExitConfirmation)
         {
-            DrawScreenTitle("LEAVE ARKENFALL?");
+            MenuUI::DrawScreenTitle("LEAVE ARKENFALL?");
             const char* message = "Are you sure you want to close the game?";
             const int messageWidth = MeasureText(message, 22);
             DrawText(message, (SCREEN_WIDTH - messageWidth) / 2, 300, 22, RAYWHITE);
-            DrawButton(CONFIRM_BUTTON, "YES, EXIT");
-            DrawButton(CANCEL_BUTTON, "CANCEL");
+            MenuUI::DrawButton(MenuUI::Button::ConfirmExit, "YES, EXIT");
+            MenuUI::DrawButton(MenuUI::Button::CancelExit, "CANCEL");
         }
     EndDrawing();
 }
