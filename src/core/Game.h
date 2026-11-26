@@ -7,6 +7,7 @@
 #include "entities/Player.h"
 #include "world/World.h"
 #include "ui/InventoryUI.h"
+#include "systems/GatheringSystem.h"
 
 class Game
 {
@@ -27,6 +28,7 @@ private:
     Player player_;
     bool characterNameError_;
     World world_;
+    GatheringSystem gatheringSystem_;
     Camera2D camera_;
     GameState state_;
     bool initialized_;
