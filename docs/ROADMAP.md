@@ -39,11 +39,11 @@ This roadmap separates the long-term game vision from the first technical delive
 - [x] Create the initial Character data model (name, provisional race/archetype, level, experience).
 - [x] Connect the first character creation screen to the Character model.
 - [x] Support keyboard and mouse selection/confirmation in character creation.
-- [ ] Persist the created character to local save data.
+- [x] Persist character identity and progression to versioned local save data.\n- [x] Save and restore the player's world position.\n- [ ] Compile and test save/load behavior on a supported desktop environment.
 - [ ] Add data-driven player attributes.
 - [ ] Define a basic interaction system.
 - [ ] Add a simple inventory prototype.
-- [ ] Establish save-data format for local testing.
+- [x] Establish a versioned local save-data format for character and position.\n- [ ] Verify save-data compatibility and recovery through runtime tests.
 
 ## Phase 3 — World and progression prototypes
 
