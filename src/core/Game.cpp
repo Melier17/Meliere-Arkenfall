@@ -220,6 +220,12 @@ void Game::UpdatePlaying(float deltaTime)
         return;
     }
 
+    if (IsKeyPressed(KEY_E))
+    {
+        gatheringSystem_.TryGather(player_.GetCenter(), character_.GetInventory());
+        return;
+    }
+
     player_.Update(deltaTime, world_);
     camera_.target = player_.GetCenter();
 }
@@ -280,6 +286,7 @@ void Game::Draw() const
 
             BeginMode2D(camera_);
                 world_.Draw();
+                gatheringSystem_.Draw(player_.GetCenter());
                 player_.Draw();
             EndMode2D();
 
@@ -287,7 +294,8 @@ void Game::Draw() const
             DrawText("ARKENFALL - PROTOTYPE v0.1.0", 24, 22, 20, GOLD);
             if (character_.IsCreated())
                 DrawText(TextFormat("Character: %s | Lv. %d", character_.GetName().c_str(), character_.GetLevel()), 24, 90, 18, RAYWHITE);
-            DrawText("Move: WASD / Arrows | ESC: Pause", 24, 50, 16, RAYWHITE);
+            DrawText("Move: WASD / Arrows | E: Gather | I: Inventory | ESC: Pause", 24, 50, 16, RAYWHITE);
+            DrawText(gatheringSystem_.GetLastMessage().c_str(), 24, 112, 16, LIGHTGRAY);
             DrawFPS(SCREEN_WIDTH - 90, 16);
 
             InventoryUI::Draw(character_.GetInventory());
