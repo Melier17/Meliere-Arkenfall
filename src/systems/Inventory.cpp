@@ -43,7 +43,7 @@ int Inventory::GetRemainingCapacityFor(const std::string& itemId,
 
     for (const ItemStack& stack : items_)
     {
-        if (stack.itemId == itemId)
+        if (stack.itemId == itemId && stack.maxStack == maxStack)
             remaining += stack.maxStack - stack.quantity;
     }
 
