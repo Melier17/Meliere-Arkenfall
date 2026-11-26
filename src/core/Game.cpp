@@ -43,6 +43,10 @@ void Game::Update(float deltaTime)
             UpdateMainMenu();
             break;
 
+        case GameState::CharacterCreation:
+            UpdateCharacterCreation();
+            break;
+
         case GameState::Playing:
             UpdatePlaying(deltaTime);
             break;
@@ -61,7 +65,7 @@ void Game::UpdateMainMenu()
 {
     if (IsKeyPressed(KEY_ENTER) || MenuUI::IsButtonPressed(MenuUI::Button::Start))
     {
-        state_ = GameState::Playing;
+        state_ = GameState::CharacterCreation;
         return;
     }
 
@@ -69,6 +73,106 @@ void Game::UpdateMainMenu()
     {
         state_ = GameState::ExitConfirmation;
     }
+}
+
+
+void Game::UpdateCharacterCreation()
+{
+    if (IsKeyPressed(KEY_ESCAPE))
+    {
+        state_ = GameState::MainMenu;
+        characterNameError_ = false;
+        return;
+    }
+
+    int codepoint = GetCharPressed();
+    while (codepoint > 0)
+    {
+        if (codepoint >= 32 && codepoint <= 126
+            && character_.GetName().size() < 20)
+        {
+            std::string name = character_.GetName();
+            name.push_back(static_cast<char>(codepoint));
+            character_.SetName(name);
+            characterNameError_ = false;
+        }
+        codepoint = GetCharPressed();
+    }
+
+    if (IsKeyPressed(KEY_BACKSPACE))
+    {
+        std::string name = character_.GetName();
+        if (!name.empty())
+            name.pop_back();
+        character_.SetName(name);
+        characterNameError_ = false;
+    }
+
+    if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT))
+    {
+        int race = static_cast<int>(character_.GetRace());
+        race = (race + (IsKeyPressed(KEY_RIGHT) ? 1 : 2)) % 3;
+        character_.SetRace(static_cast<CharacterRace>(race));
+    }
+
+    if (IsKeyPressed(KEY_TAB))
+    {
+        int archetype = static_cast<int>(character_.GetArchetype());
+        character_.SetArchetype(static_cast<CharacterArchetype>((archetype + 1) % 3));
+    }
+
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        if (character_.Create())
+        {
+            characterNameError_ = false;
+            state_ = GameState::Playing;
+        }
+        else
+        {
+            characterNameError_ = true;
+        }
+    }
+}
+
+void Game::DrawCharacterCreation() const
+{
+    MenuUI::DrawScreenTitle("CREATE YOUR ADVENTURER");
+
+    DrawText("CHARACTER NAME", 390, 285, 20, GOLD);
+    DrawRectangle(390, 315, 500, 52, Color{ 45, 55, 50, 255 });
+    DrawRectangleLines(390, 315, 500, 52, GOLD);
+    const std::string displayedName = character_.GetName().empty()
+        ? "Type a name..." : character_.GetName();
+    DrawText(displayedName.c_str(), 410, 330, 22, RAYWHITE);
+
+    const char* raceName = "Human";
+    switch (character_.GetRace())
+    {
+        case CharacterRace::Human: raceName = "Human"; break;
+        case CharacterRace::Elf: raceName = "Elf"; break;
+        case CharacterRace::Dwarf: raceName = "Dwarf"; break;
+    }
+
+    const char* archetypeName = "Adventurer";
+    switch (character_.GetArchetype())
+    {
+        case CharacterArchetype::Adventurer: archetypeName = "Adventurer"; break;
+        case CharacterArchetype::Vanguard: archetypeName = "Vanguard"; break;
+        case CharacterArchetype::Arcanist: archetypeName = "Arcanist"; break;
+    }
+
+    DrawText("RACE  [LEFT / RIGHT]", 390, 395, 18, LIGHTGRAY);
+    DrawText(raceName, 650, 395, 22, GOLD);
+    DrawText("ARCHETYPE  [TAB]", 390, 445, 18, LIGHTGRAY);
+    DrawText(archetypeName, 650, 445, 22, GOLD);
+    DrawText("ENTER: CREATE   |   ESC: BACK", 390, 520, 18, RAYWHITE);
+
+    if (characterNameError_)
+        DrawText("Please enter a character name first.", 390, 565, 18, RED);
+
+    DrawText("Prototype choices — final races and archetypes are pending design.",
+        250, 650, 16, LIGHTGRAY);
 }
 
 void Game::UpdatePlaying(float deltaTime)
@@ -121,6 +225,15 @@ void Game::UpdateExitConfirmation()
 
 void Game::Draw() const
 {
+    if (state_ == GameState::CharacterCreation)
+    {
+        BeginDrawing();
+            MenuUI::DrawMenuBackground();
+            DrawCharacterCreation();
+        EndDrawing();
+        return;
+    }
+
     if (state_ == GameState::Playing || state_ == GameState::Paused)
     {
         BeginDrawing();
@@ -133,6 +246,8 @@ void Game::Draw() const
 
             DrawRectangle(12, 12, 390, 72, Fade(BLACK, 0.65f));
             DrawText("ARKENFALL - PROTOTYPE v0.1.0", 24, 22, 20, GOLD);
+            if (character_.IsCreated())
+                DrawText(TextFormat("Character: %s | Lv. %d", character_.GetName().c_str(), character_.GetLevel()), 24, 90, 18, RAYWHITE);
             DrawText("Move: WASD / Arrows | ESC: Pause", 24, 50, 16, RAYWHITE);
             DrawFPS(SCREEN_WIDTH - 90, 16);
 
