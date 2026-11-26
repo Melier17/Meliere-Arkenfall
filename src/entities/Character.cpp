@@ -39,6 +39,10 @@ void Character::SetProgression(int level, int experience)
     experience_ = experience < 0 ? 0 : experience;
 }
 
+Inventory& Character::GetInventory() { return inventory_; }
+
+const Inventory& Character::GetInventory() const { return inventory_; }
+
 bool Character::IsCreated() const { return created_; }
 
 bool Character::Create()
