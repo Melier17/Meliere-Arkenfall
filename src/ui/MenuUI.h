@@ -12,7 +12,12 @@ namespace MenuUI
         MainMenu,
         PauseExit,
         ConfirmExit,
-        CancelExit
+        CancelExit,
+        RacePrevious,
+        RaceNext,
+        ArchetypeNext,
+        CreateCharacter,
+        BackToMenu
     };
 
     Rectangle GetButtonBounds(Button button);
