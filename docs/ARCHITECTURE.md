@@ -18,6 +18,9 @@ src/
 │   ├── Game.cpp
 │   ├── Game.h
 │   └── GameState.h
+├── ui/
+│   ├── MenuUI.cpp
+│   └── MenuUI.h
 ├── entities/
 │   ├── Player.cpp
 │   └── Player.h
@@ -33,6 +36,7 @@ The original root-level main.cpp is being kept temporarily as a legacy reference
 
 - **Game:** owns window initialization, the main loop, state transitions, frame updates, camera tracking, drawing order, and window shutdown.
 - **GameState:** defines the available high-level screens: MainMenu, Playing, Paused, and ExitConfirmation.
+- **MenuUI:** provides reusable menu button bounds, mouse hit-testing, button rendering, centered screen titles, and the menu background. It contains presentation helpers rather than game-state decisions.
 - **Player:** stores player state, reads keyboard movement, normalizes diagonal movement, and draws the player placeholder.
 - **World:** owns world dimensions and static obstacles, resolves basic axis-separated collisions, clamps the player to world bounds, and renders the test environment.
 - **Entry point:** creates the Game object and starts its run loop.
@@ -55,6 +59,7 @@ The pause state does not call the player's update function, so movement is suspe
 - Basic rectangle collision handling.
 - Main menu, pause screen, and exit confirmation.
 - Simple keyboard and mouse UI interaction.
+- Reusable menu presentation module separated from the Game controller.
 
 ## Current limitations and verification
 
@@ -68,7 +73,7 @@ The pause state does not call the player's update function, so movement is suspe
 
 ## Planned extensions
 
-Potential next modules include game states/scenes beyond the initial navigation flow, input abstraction, interaction, inventory, persistence, and data-driven world content. These are not implemented yet.
+Potential next modules include input abstraction, interaction, inventory, persistence, and data-driven world content. These are not implemented yet.
 
 ## Architectural rules
 
