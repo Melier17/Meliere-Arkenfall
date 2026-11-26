@@ -1,6 +1,7 @@
 #include "SaveSystem.h"
 
 #include <fstream>
+#include <limits>
 
 namespace
 {
@@ -60,5 +61,6 @@ bool SaveSystem::LoadCharacter(Character& character,
     character.SetRace(static_cast<CharacterRace>(race));
     character.SetArchetype(static_cast<CharacterArchetype>(archetype));
 
+    character.SetProgression(level, experience);
     return character.Create();
 }
