@@ -60,3 +60,14 @@ Vector2 Player::GetCenter() const
         position_.y + size_ / 2.0f
     };
 }
+
+Vector2 Player::GetPosition() const
+{
+    return position_;
+}
+
+void Player::SetPosition(Vector2 position)
+{
+    position_.x = position.x;
+    position_.y = position.y;
+}
