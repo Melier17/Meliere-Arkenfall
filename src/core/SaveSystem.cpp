@@ -75,7 +75,7 @@ bool SaveSystem::SavePlayerPosition(Vector2 position,
     if (!file.is_open())
         return false;
 
-    file << position.x << '\\n' << position.y << '\\n';
+    file << position.x << '\n' << position.y << '\n';
     return file.good();
 }
 
