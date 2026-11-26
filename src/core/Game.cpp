@@ -39,6 +39,12 @@ void Game::Initialize()
     if (initialized_ && SaveSystem::LoadCharacter(character_, "arkenfall_character.sav"))
     {
         state_ = GameState::Playing;
+        Vector2 savedPosition = player_.GetPosition();
+        if (SaveSystem::LoadPlayerPosition(savedPosition, "arkenfall_position.sav"))
+        {
+            player_.SetPosition(savedPosition);
+            camera_.target = player_.GetCenter();
+        }
     }
 }
 
@@ -196,6 +202,8 @@ void Game::UpdatePlaying(float deltaTime)
 {
     if (IsKeyPressed(KEY_ESCAPE))
     {
+        SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
+        SaveSystem::SavePlayerPosition(player_.GetPosition(), "arkenfall_position.sav");
         state_ = GameState::Paused;
         return;
     }
@@ -230,6 +238,7 @@ void Game::UpdateExitConfirmation()
     if (IsKeyPressed(KEY_Y) || MenuUI::IsButtonPressed(MenuUI::Button::ConfirmExit))
     {
         SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
+        SaveSystem::SavePlayerPosition(player_.GetPosition(), "arkenfall_position.sav");
         shouldClose_ = true;
         return;
     }
