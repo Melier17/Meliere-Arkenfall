@@ -19,6 +19,8 @@ FetchContent_MakeAvailable(raylib)
 add_executable(arkenfall
     src/main.cpp
     src/core/Game.cpp
+    src/core/SaveSystem.cpp
+    src/core/SaveSystem.h
     src/core/Game.h
     src/core/GameState.h
     src/ui/MenuUI.cpp
