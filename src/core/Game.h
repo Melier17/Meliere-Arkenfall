@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "GameState.h"
+#include "entities/Character.h"
 #include "entities/Player.h"
 #include "world/World.h"
 
@@ -21,7 +22,9 @@ private:
     static constexpr int SCREEN_WIDTH = 1280;
     static constexpr int SCREEN_HEIGHT = 720;
 
+    Character character_;
     Player player_;
+    bool characterNameError_;
     World world_;
     Camera2D camera_;
     GameState state_;
@@ -33,6 +36,8 @@ private:
     void Draw() const;
 
     void UpdateMainMenu();
+    void UpdateCharacterCreation();
+    void DrawCharacterCreation() const;
     void UpdatePlaying(float deltaTime);
     void UpdatePaused();
     void UpdateExitConfirmation();
