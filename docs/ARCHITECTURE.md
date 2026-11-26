@@ -22,6 +22,8 @@ src/
 │   ├── MenuUI.cpp
 │   └── MenuUI.h
 ├── entities/
+│   ├── Character.cpp
+│   ├── Character.h
 │   ├── Player.cpp
 │   └── Player.h
 ├── world/
@@ -37,6 +39,7 @@ The original root-level main.cpp is being kept temporarily as a legacy reference
 - **Game:** owns window initialization, the main loop, state transitions, frame updates, camera tracking, drawing order, and window shutdown.
 - **GameState:** defines the available high-level screens: MainMenu, Playing, Paused, and ExitConfirmation.
 - **MenuUI:** provides reusable menu button bounds, mouse hit-testing, button rendering, centered screen titles, and the menu background. It contains presentation helpers rather than game-state decisions.
+- **Character:** stores the character name, provisional race/archetype selections, level and experience. Creation validates a non-empty name; the current sample race/archetype values are placeholders and not final GDD decisions.
 - **Player:** stores player state, reads keyboard movement, normalizes diagonal movement, and draws the player placeholder.
 - **World:** owns world dimensions and static obstacles, resolves basic axis-separated collisions, clamps the player to world bounds, and renders the test environment.
 - **Entry point:** creates the Game object and starts its run loop.
