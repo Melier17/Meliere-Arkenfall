@@ -200,6 +200,18 @@ void Game::DrawCharacterCreation() const
 
 void Game::UpdatePlaying(float deltaTime)
 {
+    if (IsKeyPressed(KEY_I))
+    {
+        InventoryUI::Toggle();
+        return;
+    }
+
+    if (InventoryUI::IsOpen())
+    {
+        InventoryUI::Update(character_.GetInventory());
+        return;
+    }
+
     if (IsKeyPressed(KEY_ESCAPE))
     {
         SaveSystem::SaveCharacter(character_, "arkenfall_character.sav");
@@ -277,6 +289,8 @@ void Game::Draw() const
                 DrawText(TextFormat("Character: %s | Lv. %d", character_.GetName().c_str(), character_.GetLevel()), 24, 90, 18, RAYWHITE);
             DrawText("Move: WASD / Arrows | ESC: Pause", 24, 50, 16, RAYWHITE);
             DrawFPS(SCREEN_WIDTH - 90, 16);
+
+            InventoryUI::Draw(character_.GetInventory());
 
             if (state_ == GameState::Paused)
             {
