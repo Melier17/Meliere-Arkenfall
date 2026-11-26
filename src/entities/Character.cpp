@@ -33,6 +33,12 @@ void Character::SetArchetype(CharacterArchetype archetype) { archetype_ = archet
 int Character::GetLevel() const { return level_; }
 int Character::GetExperience() const { return experience_; }
 
+void Character::SetProgression(int level, int experience)
+{
+    level_ = level < 1 ? 1 : level;
+    experience_ = experience < 0 ? 0 : experience;
+}
+
 bool Character::IsCreated() const { return created_; }
 
 bool Character::Create()
