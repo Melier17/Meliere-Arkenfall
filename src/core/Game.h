@@ -6,6 +6,7 @@
 #include "entities/Character.h"
 #include "entities/Player.h"
 #include "world/World.h"
+#include "ui/InventoryUI.h"
 
 class Game
 {
